@@ -1,0 +1,36 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get"
+      ]
+    },
+    {
+      "type": "table",
+      "name": "activeSensors",
+      "tableName": "BarnSensors",
+      "partitionKey": "sensor",
+      "filter": "Active eq true",
+      "connection": "AzureWebJobsStorage",
+      "direction": "in"
+    },
+    {
+      "type": "table",
+      "name": "$return",
+      "tableName": "TestDataType",
+      "connection": "AzureWebJobsStorage",
+      "direction": "out"
+    },
+    {
+      "type": "table",
+      "name": "exceptionTable",
+      "tableName": "iotbarnFunctionsExceptions",
+      "connection": "AzureWebJobsStorage",
+      "direction": "out"
+    }
+  ]
+}
