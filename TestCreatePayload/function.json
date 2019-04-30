@@ -10,6 +10,15 @@
       ]
     },
     {
+      "type": "table",
+      "name": "activeSensors",
+      "tableName": "BarnSensors",
+      "partitionKey": "sensor",
+      "filter": "Active eq true",
+      "connection": "AzureWebJobsStorage",
+      "direction": "in"
+    },
+    {
       "type": "http",
       "direction": "out",
       "name": "res"
