@@ -1,13 +1,10 @@
 {
   "bindings": [
     {
-      "authLevel": "function",
-      "type": "httpTrigger",
+      "name": "myTimer",
+      "type": "timerTrigger",
       "direction": "in",
-      "name": "req",
-      "methods": [
-        "get"
-      ]
+      "schedule": "0 * * * * *"
     },
     {
       "type": "table",
@@ -22,13 +19,6 @@
       "type": "table",
       "name": "$return",
       "tableName": "TestDataType",
-      "connection": "AzureWebJobsStorage",
-      "direction": "out"
-    },
-    {
-      "type": "table",
-      "name": "exceptionTable",
-      "tableName": "iotbarnFunctionsExceptions",
       "connection": "AzureWebJobsStorage",
       "direction": "out"
     }

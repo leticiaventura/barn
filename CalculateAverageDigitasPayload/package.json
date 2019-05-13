@@ -1,0 +1,15 @@
+{
+  "name": "CalculateAverageDigitasPayload",
+  "version": "1.0.0",
+  "description": "Calculate hourly average from Digitas payloads",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "azure-storage": "^2.10.3"
+  }
+}

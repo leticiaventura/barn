@@ -6,25 +6,23 @@ module.exports = function (payloadArray, time){
     obj.partitionkey = payloadArray[0].PartitionKey._;
     obj.rowkey = time;        
 
-    verifyAndCreateProperty = function (propertyName) {
-        var value = getPropertyAvarage(payloadArray, propertyName);
+    PROPERTY_NAMES.forEach(propertyName => {
+        var value = getPropertyAverage(payloadArray, propertyName);
         if (value !== null){
             obj[propertyName] = value.toFixed(1);
             obj[`${propertyName}@odata.type`] = "Edm.Double";
         }
-    }
-
-    PROPERTY_NAMES.forEach(property => verifyAndCreateProperty(property));
+    });
 
     return obj;
 }
     
-getPropertyAvarage = (entriesArray, propertyName) => entriesArray
+getPropertyAverage = (entriesArray, propertyName) => entriesArray
     .map(payload => getPropertyValue(payload, propertyName))
     .filter((n) => typeof n === "number")
     .reduce(calculateAvarage, INITIAL_REDUCE_VALUE);
 
-getPropertyValue = (payload, prop) => (typeof payload[prop] === 'undefined') ? null : payload[prop]._;
+getPropertyValue = (payload, propertyName) => (typeof payload[propertyName] === 'undefined') ? null : payload[propertyName]._;
 
 calculateAvarage = function (accumulator, currentValue, index, array) {
     accumulator += currentValue;

@@ -1,12 +1,12 @@
 const azure = require('azure-storage');
-const normalizedPayload = require('./normalizedPayload');
+const averagePayloadEntity = require('./averagePayloadEntity');
 const dateUtils = require('./dateUtils');
 const queryFactory = require('./queryFactory');
 
 const DECODED_PAYLOAD_TABLE = "DecodedPayload";
 const MINUS_ONE_HOUR = -1;
 
-module.exports = async function (context) {
+module.exports = async function (context, myTimer) {
     var tableService = azure.createTableService();
     var start = dateUtils.getISODate(MINUS_ONE_HOUR);
     var end = dateUtils.getISODate();
@@ -19,11 +19,11 @@ module.exports = async function (context) {
                 if (error) {
                     reject(error);                   
                 } else {
-                    var normalizedPayloadEntity = {};
+                    var resultEntity = {};
                     if(result.entries.length){
-                        normalizedPayloadEntity = new normalizedPayload(result.entries, start);
+                        resultEntity = new averagePayloadEntity(result.entries, start);
                     }                            
-                    resolve(normalizedPayloadEntity);  
+                    resolve(resultEntity);  
                 }                         
             })
         }));
